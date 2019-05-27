@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/add/add",
+    "pages/manage/manage",
+    "pages/edit/edit",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#bfbfbf",
+    "selectedColor": "#666666",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "今日",
+        "iconPath": "images/home1.png",
+        "selectedIconPath": "images/home2.png"
+      },
+      {
+        "pagePath": "pages/add/add",
+        "text": "添加",
+        "iconPath": "images/add1.png",
+        "selectedIconPath": "images/add2.png"
+      },
+      {
+        "pagePath": "pages/manage/manage",
+        "text": "管理",
+        "iconPath": "images/habit1.png",
+        "selectedIconPath": "images/habit2.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

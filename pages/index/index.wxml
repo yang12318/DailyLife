@@ -1,0 +1,130 @@
+<!--index.wxml-->
+<cu-custom bgColor="bg-gradual-lightblue" isBack="{{false}}">
+	<view slot="content">TODAY</view>
+</cu-custom>
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{0==TabCur?'text-cyan cur':''}}" bindtap="tabSelect" data-id="0">
+    习惯
+  </view>
+  <view class="cu-item flex-sub {{1==TabCur?'text-cyan cur':''}}" bindtap="tabSelect" data-id="1">
+    计划
+  </view>
+  </view>
+</scroll-view>
+<block wx:if="{{TabCur==0}}">
+<view class="cu-bar bg-white solid-bottom margin-top-xs">
+  <view class='action'>
+    <text class='cuIcon-titles text-cyan '></text> 早上
+  </view>
+</view>
+  <view class="cu-list menu-avatar">
+    <view class="cu-item">
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-1.png"></cover-image>
+      </view>
+      <view class="content">
+        <view class="text-gray text-sl flex">
+          <text class="text-cut">
+							<text class="margin-right-s text-xl">早起</text>
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <text class="text-grey text-xl">1天</text>
+        <view class="margin-left-s text-xs text-grey">已连续</view>
+      </view>
+    </view>
+  </view>
+<view class="cu-bar bg-white margin-top-xs solid-bottom">
+  <view class='action'>
+    <text class='cuIcon-titles text-cyan '></text> 中午
+  </view>
+</view>
+  <view class="cu-list menu-avatar">
+    <view class="cu-item solid-bottom">
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-15.png"></cover-image>
+      </view>
+      <view class="content">
+        <view class="text-gray text-sl flex">
+          <text class="text-cut">
+							<text class="margin-right-s text-xl">喝水</text>
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <text class="text-grey text-xl">2天</text>
+        <view class="margin-left-s text-xs text-grey">已连续</view>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-9.png"></cover-image>
+      </view>
+      <view class="content">
+        <view class="text-gray text-sl flex">
+          <text class="text-cut">
+							<text class="margin-right-s text-xl">看书</text>
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <text class="text-grey text-xl">0天</text>
+        <view class="margin-left-s text-xs text-grey">已连续</view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{TabCur==1}}">
+<view class="cu-bar bg-white margin-top-xs solid-bottom">
+  <view class='action'>
+    <text class='cuIcon-titles text-cyan '></text> 已完成
+  </view>
+</view>
+ <view class="cu-list menu-avatar">
+    <view class="cu-item solid-bottom">
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-6.png"></cover-image>
+      </view>
+      <view class="content">
+        <view class="text-grey">
+						<text class="margin-right-s text-l">写代码</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s"></text>我只是来数一数大概多少字比较合适已经二十
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-grey lg cuIcon-post"></view>
+      </view>
+    </view>
+    </view>
+<view class="cu-bar bg-white margin-top-xs solid-bottom">
+  <view class='action'>
+    <text class='cuIcon-titles text-cyan '></text> 未完成
+  </view>
+</view>
+  <view class="cu-list menu-avatar">
+    <view class="cu-item">
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-2.png"></cover-image>
+      </view>
+     <view class="content">
+        <view class="text-grey">
+						<text class="margin-right-s text-l">背英语</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s"></text> 第五单元AR2discussion
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-grey lg cuIcon-post"></view>
+      </view>
+    </view>
+  </view>
+</block>
