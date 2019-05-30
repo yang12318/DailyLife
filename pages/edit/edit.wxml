@@ -2,5 +2,3 @@
 <cu-custom bgColor="bg-gradual-lightblue" isBack="{{true}}">
   <view slot="backText">返回</view>
 </cu-custom>
-<text>{{kind}}\n</text>
-<text>{{id}}</text>

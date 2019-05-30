@@ -13,136 +13,111 @@
   </view>
 </scroll-view>
 <block wx:if="{{TabCur==0}}">
-  <view class="cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{condition0}}">
-    <view class='action'>
-      <text class='cuIcon-titles text-cyan '></text> 任意时间
-    </view>
+<view class="cu-bar bg-white solid-bottom margin-top-xs">
+  <view class='action'>
+    <text class='cuIcon-titles text-cyan '></text> 早上
   </view>
-  <view class="cu-list menu-avatar" wx:if="{{condition0}}" wx:for="{{allTime}}">
+</view>
+  <view class="cu-list menu-avatar">
     <view class="cu-item">
-      <image src="../../images/habit-1.png" class="cu-avatar round lg"></image>
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-1.png"></cover-image>
+      </view>
       <view class="content">
         <view class="text-grey">
-						<text class="margin-right-s text-l">{{item.name}}</text>
+						<text class="margin-right-s text-l">早起</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">
-							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
+							<text class="margin-right-s"></text>共坚持1天
           </text>
         </view>
       </view>
       <view class="action">
-        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
+        <view class="text-grey lg cuIcon-post"></view>
       </view>
     </view>
   </view>
-
-  <view class="cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{condition1}}">
-    <view class='action'>
-      <text class='cuIcon-titles text-cyan '></text> 早上
-    </view>
+<view class="cu-bar bg-white margin-top-xs solid-bottom">
+  <view class='action'>
+    <text class='cuIcon-titles text-cyan '></text> 中午
   </view>
-  <view class="cu-list menu-avatar" wx:if="{{condition1}}" wx:for="{{morning}}">
+</view>
+  <view class="cu-list menu-avatar">
+    <view class="cu-item solid-bottom">
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-15.png"></cover-image>
+      </view>
+      <view class="content">
+        <view class="text-grey">
+						<text class="margin-right-s text-l">喝水</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s"></text>共坚持2天
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-grey lg cuIcon-post"></view>
+      </view>
+    </view>
     <view class="cu-item">
-      <image src="../../images/habit-1.png" class="cu-avatar round lg"></image>
-      <view class="content">
+      <view class="cu-avatar round lg">
+      <cover-image src="../../images/habit-9.png"></cover-image>
+      </view>
+       <view class="content">
         <view class="text-grey">
-						<text class="margin-right-s text-l">{{item.name}}</text>
+						<text class="margin-right-s text-l">看书</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">
-							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
+							<text class="margin-right-s"></text>共坚持0天
           </text>
         </view>
       </view>
       <view class="action">
-        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
-      </view>
-    </view>
-  </view>
-
-  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition2}}">
-    <view class='action'>
-      <text class='cuIcon-titles text-cyan '></text> 中午
-    </view>
-  </view>
-  <view class="cu-list menu-avatar" wx:if="{{condition2}}" wx:for="{{noon}}">
-    <view class="cu-item solid-bottom">
-      <image src="../../images/habit-15.png" class="cu-avatar round lg"></image>
-      <view class="content">
-        <view class="text-grey">
-						<text class="margin-right-s text-l">{{item.name}}</text>
-        </view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">
-							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
-          </text>
-        </view>
-      </view>
-      <view class="action">
-        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
-      </view>
-    </view>
-  </view>
-
-  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition3}}">
-    <view class='action'>
-      <text class='cuIcon-titles text-cyan '></text> 晚上
-    </view>
-  </view>
-  <view class="cu-list menu-avatar" wx:if="{{condition3}}" wx:for="{{evening}}">
-    <view class="cu-item solid-bottom">
-      <image src="../../images/habit-15.png" class="cu-avatar round lg"></image>
-      <view class="content">
-        <view class="text-grey">
-						<text class="margin-right-s text-l">{{item.name}}</text>
-        </view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">
-							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
-          </text>
-        </view>
-      </view>
-      <view class="action">
-        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
+        <view class="text-grey lg cuIcon-post"></view>
       </view>
     </view>
   </view>
 </block>
-
 <block wx:if="{{TabCur==1}}">
-  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition11}}" wx:for="{{finished}}">
-    <view class='action'>
-      <text class='cuIcon-titles text-cyan '></text> 已完成
-    </view>
+<view class="cu-bar bg-white margin-top-xs solid-bottom">
+  <view class='action'>
+    <text class='cuIcon-titles text-cyan '></text> 已完成
   </view>
-  <view class="li" data-index="0" bindtap='changeToggle' wx:if="{{condition11}}">
-    <view class="left text-grey">{{item.deadline}}</view>
-    <view class="right">
-        <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
-    </view>
+</view>
+
+<view class="li" data-index="0" bindtap='changeToggle'>
+<view class="left text-grey">2019-05-21</view>
+<view class="right">
+      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
+      </view>
   </view>
-  <view hidden="{{!selectedFlag[0]}}" wx:if="{{condition11}}">
-    <view class="cu-list menu-avatar">
-      <block wx:for="{{sublist}}" wx:for-item="subitem" wx:for-index="index">
+  <view hidden="{{!selectedFlag[0]}}">
+      <view class="cu-list menu-avatar">
+      <block wx:for="{{list01}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
-                <text class="margin-right-s text-l">subitem.title</text>
+                <text class="margin-right-s text-l">写代码</text>
             </view>
-            <!-- <view class="text-gray text-sm flex">
+            <view class="text-gray text-sm flex">
               <text class="text-cut">
-                  <text class="margin-right-s"></text>subitem.deadline
+                  <text class="margin-right-s"></text>2019-09-21
               </text>
-            </view> -->
+            </view>
           </view>
           <view class="action">
             <view class="text-grey lg cuIcon-post"></view>
           </view>
         </view>
-      </block>
-    </view>
+        </block>
+      </view>
   </view>
 
   <view class="li" data-index="1" bindtap='changeToggle'>
@@ -155,7 +130,9 @@
     <view class="cu-list menu-avatar">
       <block wx:for="{{list02}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
                 <text class="margin-right-s text-l">写代码</text>
@@ -183,7 +160,9 @@
      <view class="cu-list menu-avatar">
       <block wx:for="{{list03}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
                 <text class="margin-right-s text-l">写代码</text>
@@ -211,7 +190,9 @@
      <view class="cu-list menu-avatar">
       <block wx:for="{{list04}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
                 <text class="margin-right-s text-l">写代码</text>
@@ -245,7 +226,9 @@
       <view class="cu-list menu-avatar">
       <block wx:for="{{list01}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
                 <text class="margin-right-s text-l">写代码</text>
@@ -274,7 +257,9 @@
     <view class="cu-list menu-avatar">
       <block wx:for="{{list02}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
                 <text class="margin-right-s text-l">写代码</text>
@@ -302,7 +287,9 @@
      <view class="cu-list menu-avatar">
       <block wx:for="{{list03}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
                 <text class="margin-right-s text-l">写代码</text>
@@ -330,7 +317,9 @@
      <view class="cu-list menu-avatar">
       <block wx:for="{{list04}}" wx:for-item="item" wx:for-index="index">
         <view class="cu-item solid-bottom">
-          <image src="../../images/habit-6.png" class="cu-avatar round lg"></image>
+          <view class="cu-avatar round lg">
+          <cover-image src="../../images/habit-6.png"></cover-image>
+          </view>
           <view class="content">
             <view class="text-grey">
                 <text class="margin-right-s text-l">写代码</text>
