@@ -13,93 +13,95 @@
   </view>
 </scroll-view>
 <block wx:if="{{TabCur==0}}">
-<form>
-	<view class="cu-form-group margin-top-xs">
-		<view class="title">习惯名</view>
-		<input placeholder="1-5字"></input>
-	</view>
-</form>
-  <view class="cu-bar bg-white solid-bottom solid-top">
-    <view class="action text-black">
-      <text class="cuIcon-title text-cyan"></text>请选择图标：
-      <text class="cuIcon-picfill text-yellow"></text>
+  <form bindsubmit="saveHabit" report-submit="true">
+    <view class="cu-form-group margin-top-xs">
+      <view class="title">习惯名</view>
+      <input placeholder="1-5字" name="name" value="{{name}}"></input>
     </view>
-  </view>
-  <view class="cu-list grid col-5">
-    <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
-      <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+    <view class="cu-bar bg-white solid-bottom solid-top">
+      <view class="action text-black">
+        <text class="cuIcon-title text-cyan"></text>请选择图标：
+        <text class="cuIcon-picfill text-yellow"></text>
       </view>
-      <text>{{item.name}}</text>
     </view>
-  </view>
-  <view class="cu-bar bg-white solid-bottom solid-top">
-    <view class="action text-black">
-      <text class="cuIcon-title text-cyan"></text>请选择时间段：
+    <view class="cu-list grid col-5">
+      <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
+      
+        <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+        </view>
+        <text>{{item.name}}</text>
+      </view>
     </view>
-  </view>
-  <radio-group class="block">
-		<view class="cu-form-group margin-top-s">
-			<view>
-				<radio class="cyan radio margin-right-sm"></radio>任意时间
-				<radio class="cyan radio margin-left-sm margin-right-sm"></radio>早上
-        <radio class="cyan radio margin-left-sm margin-right-sm"></radio>中午
-        <radio class="cyan radio margin-left-sm margin-right-sm"></radio>晚上
-			</view>
-		</view>
-	</radio-group>
-  <view class="cu-bar bg-white solid-bottom solid-top">
-    <view class="action text-black">
-      <text class="cuIcon-title text-cyan"></text>请选择一周打卡时间：
+    <view class="cu-bar bg-white solid-bottom solid-top">
+      <view class="action text-black">
+        <text class="cuIcon-title text-cyan"></text>请选择时间段：
+      </view>
     </view>
-  </view>
-  <view class="cu-form-group solid-bottom">
-		<checkbox class="cyan"></checkbox>周一
-    <checkbox class="cyan"></checkbox>周二
-    <checkbox class="cyan"></checkbox>周三
-    <checkbox class="cyan"></checkbox>周四
-    <checkbox class="cyan"></checkbox>周五
-    <checkbox class="cyan"></checkbox>周六
-    <checkbox class="cyan"></checkbox>周日
-	</view>
-  <view class="cu-bar btn-group bg-white">
-    <button class="cu-btn bg-cyan">保存</button>
-  </view>
+    <radio-group class="block" name="category" value="{{radio}}">
+      <view class="cu-form-group margin-top-s">
+        <view>
+          <radio class="cyan radio margin-right-sm" value='0'></radio>任意时间
+          <radio class="cyan radio margin-left-sm margin-right-sm" value='1' checked="{{flag}}"></radio>早上
+          <radio class="cyan radio margin-left-sm margin-right-sm" value='2' checked="{{flag}}"></radio>中午
+          <radio class="cyan radio margin-left-sm margin-right-sm" value='3' checked="{{flag}}"></radio>晚上
+        </view>
+      </view>
+    </radio-group>
+    <view class="cu-bar bg-white solid-bottom solid-top">
+      <view class="action text-black">
+        <text class="cuIcon-title text-cyan"></text>请选择一周打卡时间：
+      </view>
+    </view>
+    <checkbox-group name="weekday" value="{{checkbox}}">
+      <view class="cu-form-group solid-bottom">
+        <checkbox class="cyan" value="64" checked="{{flag}}"></checkbox>周一
+        <checkbox class="cyan" value="32" checked="{{flag}}"></checkbox>周二
+        <checkbox class="cyan" value="16" checked="{{flag}}"></checkbox>周三
+        <checkbox class="cyan" value="8" checked="{{flag}}"></checkbox>周四
+        <checkbox class="cyan" value="4" checked="{{flag}}"></checkbox>周五
+        <checkbox class="cyan" value="2" checked="{{flag}}"></checkbox>周六
+        <checkbox class="cyan" value="1" checked="{{flag}}"></checkbox>周日
+      </view>
+    </checkbox-group>
+    <view class="cu-bar btn-group bg-white">
+      <button class="cu-btn bg-cyan" form-type='submit'>保存</button>
+    </view>
+  </form>
 </block>
+
 <block wx:if="{{TabCur==1}}">
-<form>
-	<view class="cu-form-group solid-bottom">
-		<view class="title">计划名</view>
-		<input placeholder="1-5字"></input>
-	</view>
-</form>
-<form>
-	<view class="cu-form-group solid-bottom">
-		<view class="title">具体内容</view>
-		<input placeholder="1-17字"></input>
-	</view>
-</form>
-<view class="cu-form-group solid-bottom">
-		<view class="title">日期选择</view>
-		<picker mode="date" value="{{date}}" start="2019-05-21" end="2020-05-21" bindchange="DateChange">
-			<view class="picker">
-				{{date}}
-			</view>
-		</picker>
-	</view>
- <view class="cu-bar bg-white solid-bottom solid-top">
-    <view class="action text-black">
-      <text class="cuIcon-title text-cyan"></text>请选择图标：
-      <text class="cuIcon-picfill text-yellow"></text>
+  <form bindsubmit='savePlan' report-submit='true'>
+    <view class="cu-form-group solid-bottom">
+      <view class="title">计划名</view>
+      <input placeholder="1-5字" name="title" value="{{title}}"></input>
     </view>
-  </view>
-  <view class="cu-list grid col-5">
-    <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
-      <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+    <view class="cu-form-group solid-bottom">
+      <view class="title">具体内容</view>
+      <input placeholder="1-17字" name="desp" value="{{desp}}"></input>
+    </view>
+    <view class="cu-form-group solid-bottom">
+      <view class="title">日期选择</view>
+      <picker mode="date" value="{{date}}" start="{{startdate}}" end="2030-12-31" bindchange="DateChange" name="date">
+        <view class="picker">
+          {{date}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-bar bg-white solid-bottom solid-top">
+      <view class="action text-black">
+        <text class="cuIcon-title text-cyan"></text>请选择图标：
+        <text class="cuIcon-picfill text-yellow"></text>
       </view>
-      <text>{{item.name}}</text>
     </view>
-  </view>
-   <view class="cu-bar btn-group bg-white">
-    <button class="cu-btn bg-cyan">保存</button>
-  </view>
+    <view class="cu-list grid col-5">
+      <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
+        <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+        </view>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+    <view class="cu-bar btn-group bg-white">
+      <button class="cu-btn bg-cyan" form-type='submit'>保存</button>
+    </view>
+  </form>
 </block>

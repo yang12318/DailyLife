@@ -1253,7 +1253,7 @@ button.icon.lg {
 }
 
 .cu-list+.cu-list {
-	margin-top: 30rpx
+	margin-top: 5rpx
 }
 
 .cu-list>.cu-item {
