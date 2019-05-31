@@ -972,6 +972,7 @@ button.icon.lg {
 .cu-avatar.sm {
 	width: 48rpx;
 	height: 48rpx;
+  margin-left: 50rpx;
 	font-size: 1em;
 }
 
@@ -1253,7 +1254,7 @@ button.icon.lg {
 }
 
 .cu-list+.cu-list {
-	margin-top: 30rpx
+	margin-top: 5rpx
 }
 
 .cu-list>.cu-item {

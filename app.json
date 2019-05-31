@@ -4,7 +4,8 @@
     "pages/add/add",
     "pages/manage/manage",
     "pages/edit/edit",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/edplan/edplan"
   ],
   "window": {
     "navigationStyle": "custom"
