@@ -16,7 +16,6 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           //发起网络请求
-          console.log('登录',res.code)
           wx.request({
             url: 'http://129.28.156.141:8080/dailyLife/api/login',
             data: {

@@ -268,11 +268,8 @@ Page({
     for(var i = 0; i < arr.length; i++) {
       sum = sum + parseInt(arr[i])
     }
-   
-
     let token = getApp().globalData.token;
     console.log(token)
-
     wx.request({
       url: ip + '/api/habit/updatehabit',
       data: {
