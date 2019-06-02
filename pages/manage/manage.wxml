@@ -13,328 +13,177 @@
   </view>
 </scroll-view>
 <block wx:if="{{TabCur==0}}">
-<view class="cu-bar bg-white solid-bottom margin-top-xs">
-  <view class='action'>
-    <text class='cuIcon-titles text-cyan '></text> 早上
+  <view class="cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{condition0}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 任意时间
+    </view>
   </view>
-</view>
-  <view class="cu-list menu-avatar">
+  <view class="cu-list menu-avatar" wx:if="{{condition0}}" wx:for="{{allTime}}">
     <view class="cu-item">
-      <view class="cu-avatar round lg">
-      <cover-image src="../../images/habit-1.png"></cover-image>
-      </view>
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
       <view class="content">
         <view class="text-grey">
-						<text class="margin-right-s text-l">早起</text>
+						<text class="margin-right-s text-l">{{item.name}}</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">
-							<text class="margin-right-s"></text>共坚持1天
+							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
           </text>
         </view>
       </view>
       <view class="action">
-        <view class="text-grey lg cuIcon-post"></view>
+        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
       </view>
     </view>
   </view>
-<view class="cu-bar bg-white margin-top-xs solid-bottom">
-  <view class='action'>
-    <text class='cuIcon-titles text-cyan '></text> 中午
+
+  <view class="cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{condition1}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 早上
+    </view>
   </view>
-</view>
-  <view class="cu-list menu-avatar">
+  <view class="cu-list menu-avatar" wx:if="{{condition1}}" wx:for="{{morning}}">
+    <view class="cu-item">
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
+      <view class="content">
+        <view class="text-grey">
+						<text class="margin-right-s text-l">{{item.name}}</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition2}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 中午
+    </view>
+  </view>
+  <view class="cu-list menu-avatar" wx:if="{{condition2}}" wx:for="{{noon}}">
     <view class="cu-item solid-bottom">
-      <view class="cu-avatar round lg">
-      <cover-image src="../../images/habit-15.png"></cover-image>
-      </view>
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
       <view class="content">
         <view class="text-grey">
-						<text class="margin-right-s text-l">喝水</text>
+						<text class="margin-right-s text-l">{{item.name}}</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">
-							<text class="margin-right-s"></text>共坚持2天
+							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
           </text>
         </view>
       </view>
       <view class="action">
-        <view class="text-grey lg cuIcon-post"></view>
+        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
       </view>
     </view>
-    <view class="cu-item">
-      <view class="cu-avatar round lg">
-      <cover-image src="../../images/habit-9.png"></cover-image>
-      </view>
-       <view class="content">
+  </view>
+
+  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition3}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 晚上
+    </view>
+  </view>
+  <view class="cu-list menu-avatar" wx:if="{{condition3}}" wx:for="{{evening}}">
+    <view class="cu-item solid-bottom">
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
+      <view class="content">
         <view class="text-grey">
-						<text class="margin-right-s text-l">看书</text>
+						<text class="margin-right-s text-l">{{item.name}}</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">
-							<text class="margin-right-s"></text>共坚持0天
+							<text class="margin-right-s"></text>共坚持{{item.clockinDays}}天
           </text>
         </view>
       </view>
       <view class="action">
-        <view class="text-grey lg cuIcon-post"></view>
+        <view class="text-grey lg cuIcon-post" data-id="{{item.id}}" bindtap='reviseHabit'></view>
       </view>
     </view>
   </view>
 </block>
+
 <block wx:if="{{TabCur==1}}">
-<view class="cu-bar bg-white margin-top-xs solid-bottom">
-  <view class='action'>
-    <text class='cuIcon-titles text-cyan '></text> 已完成
-  </view>
-</view>
-
-<view class="li" data-index="0" bindtap='changeToggle'>
-<view class="left text-grey">2019-05-21</view>
-<view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
-      </view>
-  </view>
-  <view hidden="{{!selectedFlag[0]}}">
-      <view class="cu-list menu-avatar">
-      <block wx:for="{{list01}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
-            </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
-            </view>
-          </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
-        </block>
-      </view>
-  </view>
-
-  <view class="li" data-index="1" bindtap='changeToggle'>
-    <view class="left text-grey">2019-05-22</view>
-    <view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
-    </view>
-  </view>
-  <view hidden="{{!selectedFlag[1]}}">
-    <view class="cu-list menu-avatar">
-      <block wx:for="{{list02}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
-            </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
-            </view>
-          </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
-        </block>
-      </view>
-  </view>
-  <view class="li" data-index="2" bindtap='changeToggle'>
-    <view class="left text-grey">2019-09-21</view>
-    <view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
-    </view>
-  </view>
-  <view hidden="{{!selectedFlag[2]}}">
-     <view class="cu-list menu-avatar">
-      <block wx:for="{{list03}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
-            </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
-            </view>
-          </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
-        </block>
-      </view>
-  </view>
-  <view class="li" data-index="3" bindtap='changeToggle'>
-    <view class="left text-grey">2020-01-01</view>
-    <view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
-    </view>
-  </view>
- <view hidden="{{!selectedFlag[3]}}">
-     <view class="cu-list menu-avatar">
-      <block wx:for="{{list04}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
-            </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
-            </view>
-          </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
-        </block>
-      </view>
-  </view>
-
-  <view class="cu-bar bg-white margin-top-xs solid-bottom">
+  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition11}}">
     <view class='action'>
-      <text class='cuIcon-titles text-cyan '></text> 未完成
+      <text class='cuIcon-titles text-cyan '></text> 已完成
     </view>
   </view>
-<view class="li" data-index="0" bindtap='changeToggle'>
-<view class="left text-grey">2019-05-21</view>
-<view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
+  <view wx:for="{{finished}}" wx:for-index="index" wx:for-term="term"  wx:if="{{condition11}}">
+    <view class="li" data-index="{{index}}" bindtap='changeToggle'>
+      <view class="left text-grey">{{item.date}}</view>
+      <view class="right">
+          <text class="cuIcon {{selectedFlag[index]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
       </view>
-  </view>
-  <view hidden="{{!selectedFlag[0]}}">
+    </view>
+    <view hidden="{{!selectedFlag[index]}}">
+    <!-- <text>{{selectedFlag[index]}}</text> -->
+    <!-- <view> -->
       <view class="cu-list menu-avatar">
-      <block wx:for="{{list01}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
+        <block wx:for="{{item.list}}" wx:for-item="subitem" wx:for-index="subindex">
+          <view class="cu-item solid-bottom">
+            <image src="{{iconList2[subitem.icon].icon}}" class="cu-avatar round lg"></image>
+            <view class="content">
+              <view class="text-grey">
+                  <text class="margin-right-s text-l">{{subitem.title}}</text>
+              </view>
+              <view class="text-gray text-sm flex">
+                <text class="text-cut">
+                    <text class="margin-right-s"></text>{{subitem.deadline}}
+                </text>
+              </view>
             </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
+            <view class="action" data-id="{{subitem.id}}" bindtap='revisePlan'>
+              <view class="text-grey lg cuIcon-post"></view>
             </view>
           </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
         </block>
       </view>
+    </view>
   </view>
 
-  <view class="li" data-index="1" bindtap='changeToggle'>
-    <view class="left text-grey">2019-05-22</view>
-    <view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
+  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition22}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text>未完成
     </view>
   </view>
-  <view hidden="{{!selectedFlag[1]}}">
-    <view class="cu-list menu-avatar">
-      <block wx:for="{{list02}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
-            </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
-            </view>
-          </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
-        </block>
+  <view wx:for="{{unfinished}}" wx:for-index="index" wx:for-term="term"  wx:if="{{condition22}}">
+    <view class="li" data-index="{{index}}" bindtap='changeToggle2'>
+      <view class="left text-grey">{{item.date}}</view>
+      <view class="right">
+          <text class="cuIcon {{selectedFlag2[index]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
       </view>
-  </view>
-  <view class="li" data-index="2" bindtap='changeToggle'>
-    <view class="left text-grey">2019-09-21</view>
-    <view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
     </view>
-  </view>
-  <view hidden="{{!selectedFlag[2]}}">
-     <view class="cu-list menu-avatar">
-      <block wx:for="{{list03}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
+    <view hidden="{{!selectedFlag2[index]}}">
+    <!-- <text>{{selectedFlag2[index]}}</text> -->
+    <!-- <view> -->
+      <view class="cu-list menu-avatar">
+        <block wx:for="{{item.list}}" wx:for-item="subitem" wx:for-index="subindex">
+          <view class="cu-item solid-bottom">
+            <image src="{{iconList2[subitem.icon].icon}}" class="cu-avatar round lg"></image>
+            <view class="content">
+              <view class="text-grey">
+                  <text class="margin-right-s text-l">{{subitem.title}}</text>
+              </view>
+              <view class="text-gray text-sm flex">
+                <text class="text-cut">
+                    <text class="margin-right-s"></text>{{subitem.deadline}}
+                </text>
+              </view>
             </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
+            <view class="action" bindtap="revisePlan" data-id="{{subitem.id}}">
+              <view class="text-grey lg cuIcon-post"></view>
             </view>
           </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
         </block>
       </view>
-  </view>
-  <view class="li" data-index="3" bindtap='changeToggle'>
-    <view class="left text-grey">2020-01-01</view>
-    <view class="right">
-      <text class="cuIcon {{selectedFlag[0]?'cuIcon-unfold':'cuIcon-fold'}}"> </text>
     </view>
-  </view>
- <view hidden="{{!selectedFlag[3]}}">
-     <view class="cu-list menu-avatar">
-      <block wx:for="{{list04}}" wx:for-item="item" wx:for-index="index">
-        <view class="cu-item solid-bottom">
-          <view class="cu-avatar round lg">
-          <cover-image src="../../images/habit-6.png"></cover-image>
-          </view>
-          <view class="content">
-            <view class="text-grey">
-                <text class="margin-right-s text-l">写代码</text>
-            </view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-                  <text class="margin-right-s"></text>2019-09-21
-              </text>
-            </view>
-          </view>
-          <view class="action">
-            <view class="text-grey lg cuIcon-post"></view>
-          </view>
-        </view>
-        </block>
-      </view>
   </view>
 </block>

@@ -13,52 +13,61 @@
   </view>
 </scroll-view>
 <block wx:if="{{TabCur==0}}">
-<view class="cu-bar bg-white solid-bottom margin-top-xs">
-  <view class='action'>
-    <text class='cuIcon-titles text-cyan '></text> 早上
+  <view class="cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{condition0}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 任意时间
+    </view>
   </view>
-</view>
-  <view class="cu-list menu-avatar">
-    <view class="cu-item">
-      <view class="cu-avatar round lg">
-      <cover-image src="../../images/habit-1.png"></cover-image>
-      </view>
+  <view class="cu-list menu-avatar" wx:for="{{allTime}}" wx:for-index="index" wx:if="{{condition0}}">
+    <view class="cu-item" data-id="{{item.id}}" data-flag="{{item.flag_today}}" data-index="{{index}}" bindtap='click'>
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
       <view class="content">
         <view class="text-gray text-sl flex">
           <text class="text-cut">
-							<text class="margin-right-s text-xl">早起</text>
+							<text class="margin-right-s text-xl">{{item.name}}</text>
+          </text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s" wx:if="{{item.flag_today}}">已打卡</text>
+              <text class="margin-right-s" wx:if="{{!item.flag_today}}">未打卡</text>
           </text>
         </view>
       </view>
       <view class="action">
-        <text class="text-grey text-xl">1天</text>
+        <text class="text-grey text-xl">{{item.insistDays}}天</text>
         <view class="margin-left-s text-xs text-grey">已连续</view>
       </view>
     </view>
   </view>
-<view class="cu-bar bg-white margin-top-xs solid-bottom">
-  <view class='action'>
-    <text class='cuIcon-titles text-cyan '></text> 中午
+
+  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition1}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 早上
+    </view>
   </view>
-</view>
-  <view class="cu-list menu-avatar">
-    <view class="cu-item solid-bottom">
-      <view class="cu-avatar round lg">
-      <cover-image src="../../images/habit-15.png"></cover-image>
-      </view>
+  <view class="cu-list menu-avatar" wx:for="{{morning}}" wx:for-index="index" wx:if="{{condition1}}">
+    <view class="cu-item solid-bottom" data-id="{{item.id}}" data-index="{{index}}" data-flag="{{item.flag_today}}" bindtap='click'>
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
       <view class="content">
         <view class="text-gray text-sl flex">
           <text class="text-cut">
-							<text class="margin-right-s text-xl">喝水</text>
+							<text class="margin-right-s text-xl">{{item.name}}</text>
+          </text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s" wx:if="{{item.flag_today}}">已打卡</text>
+              <text class="margin-right-s" wx:if="{{!item.flag_today}}">未打卡</text>
           </text>
         </view>
       </view>
       <view class="action">
-        <text class="text-grey text-xl">2天</text>
+        <text class="text-grey text-xl">{{item.insistDays}}天</text>
         <view class="margin-left-s text-xs text-grey">已连续</view>
       </view>
     </view>
-    <view class="cu-item">
+    <!-- <view class="cu-item">
       <view class="cu-avatar round lg">
       <cover-image src="../../images/habit-9.png"></cover-image>
       </view>
@@ -72,57 +81,110 @@
       <view class="action">
         <text class="text-grey text-xl">0天</text>
         <view class="margin-left-s text-xs text-grey">已连续</view>
+      </view> 
+    </view> -->
+  </view>
+
+  <view class="cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{condition2}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 中午
+    </view>
+  </view>
+  <view class="cu-list menu-avatar" wx:for="{{noon}}" wx:for-index="index" wx:if="{{condition2}}">
+    <view class="cu-item" data-id="{{item.id}}" data-index="{{index}}" data-flag="{{item.flag_today}}" bindtap='click'>
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
+      <view class="content">
+        <view class="text-gray text-sl flex">
+          <text class="text-cut">
+							<text class="margin-right-s text-xl">{{item.name}}</text>
+          </text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s" wx:if="{{item.flag_today}}">已打卡</text>
+              <text class="margin-right-s" wx:if="{{!item.flag_today}}">未打卡</text>
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <text class="text-grey text-xl">{{item.insistDays}}天</text>
+        <view class="margin-left-s text-xs text-grey">已连续</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white solid-bottom margin-top-xs" wx:if="{{condition3}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 晚上
+    </view>
+  </view>
+  <view class="cu-list menu-avatar" wx:for="{{evening}}" wx:for-index="index" wx:if="{{condition3}}">
+    <view class="cu-item" data-id="{{item.id}}" data-index="{{index}}" data-flag="{{item.flag_today}}" bindtap='click'>
+      <image src="{{iconList[item.icon].icon}}" class="cu-avatar round lg"></image>
+      <view class="content">
+        <view class="text-gray text-sl flex">
+          <text class="text-cut">
+							<text class="margin-right-s text-xl">{{item.name}}</text>
+          </text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="margin-right-s" wx:if="{{item.flag_today}}">已打卡</text>
+              <text class="margin-right-s" wx:if="{{!item.flag_today}}">未打卡</text>
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <text class="text-grey text-xl">{{item.insistDays}}天</text>
+        <view class="margin-left-s text-xs text-grey">已连续</view>
       </view>
     </view>
   </view>
 </block>
+
 <block wx:if="{{TabCur==1}}">
-<view class="cu-bar bg-white margin-top-xs solid-bottom">
-  <view class='action'>
-    <text class='cuIcon-titles text-cyan '></text> 已完成
+  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition11}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 已完成
+    </view>
   </view>
-</view>
- <view class="cu-list menu-avatar">
-    <view class="cu-item solid-bottom">
-      <view class="cu-avatar round lg">
-      <cover-image src="../../images/habit-6.png"></cover-image>
-      </view>
+ <view class="cu-list menu-avatar" wx:for="{{finished}}" wx:if="{{condition11}}" wx:for-index="index">
+    <view class="cu-item solid-bottom" bindtap='cancelFinish' data-id="{{item.id}}" data-index="{{index}}">
+      <image src="{{iconList2[item.icon].icon}}" class="cu-avatar round lg"></image>
       <view class="content">
         <view class="text-grey">
-						<text class="margin-right-s text-l">写代码</text>
+						<text class="margin-right-s text-l">{{item.title}}</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">
-							<text class="margin-right-s"></text>我只是来数一数大概多少字比较合适已经二十
+							<text class="margin-right-s"></text>{{item.desp}}
           </text>
         </view>
       </view>
       <view class="action">
-        <view class="text-grey lg cuIcon-post"></view>
+        <view class="text-grey lg cuIcon-post" bindtap='revise' data-id="{{item.id}}"></view>
       </view>
     </view>
     </view>
-<view class="cu-bar bg-white margin-top-xs solid-bottom">
-  <view class='action'>
-    <text class='cuIcon-titles text-cyan '></text> 未完成
+  <view class="cu-bar bg-white margin-top-xs solid-bottom" wx:if="{{condition22}}">
+    <view class='action'>
+      <text class='cuIcon-titles text-cyan '></text> 未完成
+    </view>
   </view>
-</view>
-  <view class="cu-list menu-avatar">
-    <view class="cu-item">
-      <view class="cu-avatar round lg">
-      <cover-image src="../../images/habit-2.png"></cover-image>
-      </view>
-     <view class="content">
+  <view class="cu-list menu-avatar" wx:for="{{unfinished}}" wx:for-index="index" wx:if="{{condition22}}">
+    <view class="cu-item" data-id="{{item.id}}" data-index="{{index}}">
+      <image src="{{iconList2[item.icon].icon}}" bindtap='finish' data-id="{{item.id}}" class="cu-avatar round lg"></image>
+      <view class="content" bindtap='finish' data-id="{{item.id}}">
         <view class="text-grey">
-						<text class="margin-right-s text-l">背英语</text>
+            <text class="margin-right-s text-l">{{item.title}}</text>
         </view>
         <view class="text-gray text-sm flex">
           <text class="text-cut">
-							<text class="margin-right-s"></text> 第五单元AR2discussion
+              <text class="margin-right-s"></text>{{item.desp}}
           </text>
         </view>
       </view>
-      <view class="action">
+      <view class="action" bindtap='revise' data-id="{{item.id}}">
         <view class="text-grey lg cuIcon-post"></view>
       </view>
     </view>

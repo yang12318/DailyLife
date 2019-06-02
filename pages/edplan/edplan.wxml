@@ -1,0 +1,39 @@
+<!--pages/edplan/edplan.wxml-->
+<cu-custom bgColor="bg-gradual-lightblue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+</cu-custom>
+<form bindsubmit='savePlan' report-submit='true'>
+    <view class="cu-form-group solid-bottom">
+      <view class="title">计划名</view>
+      <input placeholder="1-5字" name="title" value="{{title}}"></input>
+    </view>
+    <view class="cu-form-group solid-bottom">
+      <view class="title">具体内容</view>
+      <input placeholder="1-17字" name="desp" value="{{desp}}"></input>
+    </view>
+    <view class="cu-form-group solid-bottom">
+      <view class="title">日期选择</view>
+      <picker mode="date" value="{{date}}" start="{{startdate}}" end="2030-12-31" bindchange="DateChange" name="date">
+        <view class="picker">
+          {{date}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-bar bg-white solid-bottom solid-top">
+      <view class="action text-black">
+        <text class="cuIcon-title text-cyan"></text>请选择图标：
+        <image class="cu-avatar sm" src="{{iconList2[icon].icon}}"></image>
+      </view>
+    </view>
+    <view class="cu-list grid col-5">
+      <view class="cu-item" wx:for="{{iconList2}}" wx:for-index="index">
+        <image src="{{iconList2[index].icon}}" class="cu-avatar sm" data-index="{{index}}" bindtap='iconclick2'>
+        </image>
+      </view>
+      <input name="icon" hidden='true' value="{{icon}}"></input>
+    </view>
+    <view class="cu-bar btn-group bg-white">
+      <button class="cu-btn bg-red" bindtap="tabDelete">删除</button>
+      <button class="cu-btn bg-cyan" form-type='submit'>保存</button>
+    </view>
+  </form>

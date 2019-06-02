@@ -1,6 +1,22 @@
-// pages/edit/edit.js
+// pages/edplan/edplan.js
 let ip = 'http://129.28.156.141:8080/dailyLife';
-var kind, id, icon, constweekday    //这两个变量我放在这里了，该页面任意地方都可以使用
+var id, icon, kind
+Date.prototype.Format = function (fmt) { //author: meizz 
+  var o = {
+    "M+": this.getMonth() + 1, //月份 
+    "d+": this.getDate(), //日 
+    "h+": this.getHours(), //小时 
+    "m+": this.getMinutes(), //分 
+    "s+": this.getSeconds(), //秒 
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+    "S": this.getMilliseconds() //毫秒 
+  };
+  if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+  return fmt;
+}
+
 Page({
 
   /**
@@ -8,8 +24,8 @@ Page({
    */
   data: {
     icon: -1,
-    iconflag_habit: false,
-    iconList: [{
+    iconflag_plan: true,
+    iconList2: [{
       icon: '../../images/habit-0.png',
     }, {
       icon: '../../images/habit-1.png',
@@ -71,48 +87,36 @@ Page({
       icon: '../../images/habit-29.png',
     }],
     gridCol: 5,
+    date: new Date().Format('yyyy-MM-dd'),
     skin: false,
-    flag1: false,
-    flag2: false,
-    flag3: false,
-    flag4: false
+    startdate: new Date().Format('yyyy-MM-dd')
   },
 
+  DateChange(e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this
     id = options.id
+    kind = options.kind
     let token = getApp().globalData.token;
     wx.request({
-      url: ip + '/api/habit/detail?token=' + token +'&id=' + id,
-      success: function (res) {
-        var category = res.data.category
-        var flag0, flag1, flag2, flag3
-        if(category == 0) {
-          flag0 = true
-          flag1 = flag2 = flag3 = false
-        } else if(category == 1) {
-          flag1 = true
-          flag0 = flag2 = flag3 = false
-        } else if(category == 2) {
-          flag2 = true
-          flag0 = flag1 = flag3 = false
-        } else if(category == 3) {
-          flag3 = true
-          flag0 = flag1 = flag2 = false
-        }
-        constweekday = res.data.weekday
+      url: ip+'/api/plan/detail?token=' + token + '&id='+id,
+      success: function(res) {
+        var deadline = res.data.deadline
+        console.log(deadline)
+        deadline = deadline.substr(0,4)+"-"+deadline.substr(4,2)+"-"+deadline.substr(6,2)
+        console.log(deadline)
         that.setData({
-          name: res.data.name,
+          title: res.data.title,
+          desp: res.data.desp,
+          date: deadline,
           icon: res.data.icon,
-          category: res.data.category,
-          icon: res.data.icon,
-          flag0: flag0,
-          flag1: flag1,
-          flag2: flag2,
-          flag3: flag3
         })
       }
     })
@@ -166,26 +170,18 @@ Page({
   onShareAppMessage: function () {
 
   },
-  saveHabit: function (e) {
+  savePlan: function (e) {
     var that = this
-    // console.log(e.detail.value.weekday)
-    if (e.detail.value.name == "") {
+    if (e.detail.value.title == "") {
       wx.showToast({
-        title: '习惯名不能为空',
+        title: '计划名不能为空',
         icon: 'none'
       })
       return
     }
-    if (e.detail.value.name.length < 1 || e.detail.value.name.length > 5) {
+    if (e.detail.value.desp == "") {
       wx.showToast({
-        title: '习惯名的长度必须在1-5字之间',
-        icon: 'none'
-      })
-      return
-    }
-    if (e.detail.value.category == "") {
-      wx.showToast({
-        title: '时间段不能为空',
+        title: '具体内容不能为空',
         icon: 'none'
       })
       return
@@ -195,35 +191,47 @@ Page({
         title: '请选择一个图标',
         icon: 'none'
       })
+      return
     }
-    // if (Object.keys(e.detail.value.weekday).length == 0) {
-    //   wx.showToast({
-    //     title: '打卡时间不能为空',
-    //     icon: 'none'
-    //   })
-    //   return
-    // }
-    // var arr = e.detail.value.weekday
-    // var sum = 0
-    // for (var i = 0; i < arr.length; i++) {
-    //   sum = sum + parseInt(arr[i])
-    // }
-    // console.log(sum)
-    console.log("检查参数")
+    if (e.detail.value.title.length < 1 || e.detail.value.title.length > 5) {
+      wx.showToast({
+        title: '计划名的长度必须在1-5字之间',
+        icon: 'none'
+      })
+      return
+    }
+    if (e.detail.value.desp.length < 1 || e.detail.value.desp.length > 17) {
+      wx.showToast({
+        title: '计划具体内容的长度必须在1-17字之间',
+        icon: 'none'
+      })
+      return
+    }
+    console.log(e.detail.value.date)
+    if (e.detail.value.date < (new Date().Format('yyyy-MM-dd'))) {
+      wx.showToast({
+        title: '日期选择错误',
+        icon: 'none'
+      })
+      return
+    }
+    var temp = e.detail.value.date
+    console.log("temp=" + temp)
+    temp = temp.substr(0, 4) + temp.substr(5, 2) + temp.substr(8, 2)
+    console.log(temp)
     console.log(id)
-    console.log(e.detail.value.name)
+    console.log(e.detail.value.title)
     console.log(e.detail.value.icon)
-    console.log(e.detail.value.category)
-    console.log(constweekday)
+    console.log(e.detail.value.desp)
     let token = getApp().globalData.token;
     wx.request({
-      url: ip + '/api/habit/updatehabit',
+      url: ip + '/api/plan/updateplan',
       data: {
         id: id,
-        name: e.detail.value.name,
+        title: e.detail.value.title,
         icon: e.detail.value.icon,
-        category: e.detail.value.category,
-        weekday: constweekday,
+        desp: e.detail.value.desp,
+        deadline: temp,
         token: token
       },
       header: {
@@ -237,20 +245,30 @@ Page({
             title: desp,
           })
           that.setData({
-            name: "",
-            flag: false,
+            title: "",
+            desp: "",
             icon: -1,
-            iconflag_habit: true
+            date: new Date().Format('yyyy-MM-dd')
           })
-          wx.switchTab({
-            url: '../manage/manage',
-            success: function (res) {
-            }
-          })
+          if(kind == 1) {
+            //kind=1代表是从manage页跳转过来的
+            wx.switchTab({
+              url: '../manage/manage',
+              success: function (res) {
+              }
+            })
+          } else {
+            //kind=2代表是从index页跳转过来的
+            wx.switchTab({
+              url: '../index/index',
+              success: function (res) {
+              }
+            })
+          }
         } else {
           wx.showToast({
             title: desp,
-            icon: 'none'
+            icon: 'none',
           })
         }
       },
@@ -262,13 +280,12 @@ Page({
       }
     })
   },
-  
-  iconclick: function (e) {
+  iconclick2: function (e) {
     var that = this
     var index = e.currentTarget.dataset.index
     that.setData({
       icon: index,
-      iconflag_habit: false
+      iconflag_plan: false
     })
   },
   tabDelete: function (e) {
@@ -281,20 +298,31 @@ Page({
           // 用户点击了确定 可以调用删除方法了
           let token = getApp().globalData.token;
           wx.request({
-            url: ip + '/api/habit/deletehabit?token=' + token + '&habitId=' + id,
+            url: ip + '/api/plan/deleteplan?token=' + token + '&planId=' + id,
             success: function (res) {
-              console.log('删除成功', res)
+              console.log('删除成功',res)
               var status = res.data.status
               var desp = res.data.desp
               if (status == 1) {
                 wx.showToast({
                   title: desp,
                 })
-                wx.switchTab({
-                  url: '../manage/manage',
-                  success: function (res) {
-                  }
-                })
+                //在这里应该跳转回去，并执行刷新
+                if (kind == 1) {
+                  //kind=1代表是从manage页跳转过来的
+                  wx.switchTab({
+                    url: '../manage/manage',
+                    success: function (res) {
+                    }
+                  })
+                } else {
+                  //kind=2代表是从index页跳转过来的
+                  wx.switchTab({
+                    url: '../index/index',
+                    success: function (res) {
+                    }
+                  })
+                }
               } else {
                 wx.showToast({
                   title: desp,

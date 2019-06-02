@@ -6,10 +6,58 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
+      
+    let that = this;
     // 登录
     wx.login({
+     
       success: res => {
+        console.log('登录', res.code)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if (res.code) {
+          //发起网络请求
+          console.log('登录',res.code)
+          wx.request({
+            url: 'http://129.28.156.141:8080/dailyLife/api/login',
+            data: {
+              code: res.code
+            },
+            success: function(res) {
+              var token = res.data.token
+              console.log(token)
+              wx.setStorage({
+                key: 'token',
+                data: token,
+              })
+              wx.showToast({
+                title: '登录成功',
+              })
+              that.globalData.token = encodeURIComponent(wx.getStorageSync('token'));
+
+            },
+            fail: function(res) {
+              wx.showToast({
+                title: '登录失败',
+                icon: 'none'
+              })
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+          wx.showToast({
+            title: '登录失败',
+            icon: 'none'
+          })
+
+
+         
+        }
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '登录失败',
+          icon: 'none'
+        })
       }
     })
     // 获取用户信息
@@ -42,6 +90,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    token:''
   }
 })
